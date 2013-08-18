@@ -1,15 +1,16 @@
 ;;  DO times-alist and init state
-(load "ajsm.lisp")
+(load "ajsm.lisp") ;this way you can just load this file and all will
+		   ;be well
 
 (in-package :ajsm)
 
-(defvar *canyon-vertices* nil)
-(defvar *canyon-graph* nil)
-(defvar *canyon-init-state* nil)
-(defvar *canyon-times-alist* nil)
-(defvar *canyon-day-groups* nil)
+(defvar *example-vertices* nil)
+(defvar *example-graph* nil)
+(defvar *example-init-state* nil)
+(defvar *example-times-alist* nil)
+(defvar *example-day-groups* nil)
 
-(setf *canyon-vertices*
+(setf *example-vertices*
       '(
         ;; days
         (mon_fri nil 'days)
@@ -49,52 +50,52 @@
         (tapeu4 nil 'dev)
         ;; calendars
         (nonworking nil 'hcal)
-        (slfcu_dly nil 'scal)
-        (monthstr nil 'scal)            ;not really a calendar, but a logical value in the IBM scheduler
+        (example_dly nil 'scal)
+        (monthstr nil 'scal) ;not really a calendar, but a logical
+			     ;value in the IBM scheduler
+
         ;; groups
-        ;; (nightlysav (slfcu_dly nonworking t2100 mon_sat) 'group)
         ;; vertices and edges
-        (chgebsdate (t0100))
-        (chgpowrjrn (t1200 mon))
-        (clnoutqs (t1200 mon_fri))
-        (dltaldonq (t1900))
-        (ebs_down (t1830))
+        (job1 (t0100))
+        (job2 (t1200 mon))
+        (job3 (t1200 mon_fri))
+        (job4 (t1900))
+        (foojob (t1830))
         (ebs_up (t0650))
-        (endannual (t1800 mon_fri))
-        (hbs_down (t2101 mon_fri))
-        (hbs_down2 (t1600 sat))
-        (hbs_down3 (t2300 mon_fri))
-        (hbs_start (t2145 mon_fri))
-        (hbs_start2 (t1700 sat))
-        (hbs_start3 (t0005 tues_sat))
-        (powerlockn (t0400))
-        (powertrepd (t0405))
-        (ptautbrkrp (t0200))
-        (pwrtjrnsav (t1645 slfcu_dly nonworking))
-        (savpgmr (slfcu_dly nonworking t2100 mon_sat))
-        (slajs002r (t1930))
-        (tsthtpsvrd (t1800 slfcu_dly nonworking))
-        (tsthtpsvru (t0600 slfcu_dly nonworking))
-        (tappgmr (savpgmr tapeu4))
-        (perfnavdr (t0030))
-        (perfnavds (sun t0330))
-        (perfnavpg (monthstr t0230))
-        (perfnavpm (t1930))
-        (qs9autoptf (wed t1100))
-        (qs9autotst (wed t1000))
-        (qs9sacol (t1807))
+        (catsneeze (t1800 mon_fri))
+        (foo_down (t2101 mon_fri))
+        (foo_down2 (t1600 sat))
+        (foo_down3 (t2300 mon_fri))
+        (foo_start (t2145 mon_fri))
+        (foo_start2 (t1700 sat))
+        (foo_start3 (t0005 tues_sat))
+        (barjob (t0400))
+        (bazjob (t0405))
+        (quxjob (t0200))
+        (quuxjob (t1645 example_dly nonworking))
+        (dailysav (example_dly nonworking t2100 mon_sat))
+        (savall (t1930))
+        (catd (t1800 example_dly nonworking))
+        (catu (t0600 example_dly nonworking))
+        (dlybrgdwn (dailysav tapeu4))
+        (dogr (t0030))
+        (dogs (sun t0330))
+        (flabberg (monthstr t0230))
+        (flabberm (t1930))
+        (fluzptf (wed t1100))
+        (fluztst (wed t1000))
+        (snizzl (t1807))
         ))
 
-
-        (setf *canyon-init-state* 
+        (setf *example-init-state* 
          '(
            ;; sunday slmnu1603 		;strange deps
            ;; m_f m_sa m_su			;days
            ;; sat_tapeuf dailybrms_tapeu4 itemupd_tapeu4 transsav_tapeu4 ;tapes
-           ;; nonworking slfcu_dly
+           ;; nonworking example_dly
            ))					     ;calendars
 
-        (setf *canyon-times-alist* 
+        (setf *example-times-alist* 
               '((t0005 . 0005)
                 (t0030 . 0030)
                 (t0100 . 0100)
@@ -121,10 +122,10 @@
                 (t2145 . 2145)
                 (t2300 . 2300)))
 
-        (setf *canyon-graph* (ajsm:bulk-add-vertices *graph* *canyon-vertices*))
+        (setf *example-graph* (ajsm:bulk-add-vertices *graph* *example-vertices*))
 
         ;; Day groups
-        (setf *canyon-day-groups*
+        (setf *example-day-groups*
          '((mon_fri . (monday tuesday wednesday thursday friday))
            (mon_sat . (monday tuesday wednesday thursday friday saturday))
            (tues_sat . (tuesday wednesday thursday friday saturday))
@@ -134,14 +135,14 @@
            (sun . (sunday))
            ))
 
-(defun canyon-do-december-2012 ()
-  (let ((graph *canyon-graph*)
-        (times *canyon-times-alist*)
-        (grps *canyon-day-groups*))
+(defun example-do-december-2012 ()
+  (let ((graph *example-graph*)
+        (times *example-times-alist*)
+        (grps *example-day-groups*))
     (format t "~%Restting graph.~%")
     (reset-graph graph)
     (format t "Initializing state...~%")
-    (loop for vertex in '(tapeu4 slfcu_dly nonworking) do
+    (loop for vertex in '(tapeu4 example_dly nonworking) do
          (run-vertex graph vertex))
     ;; week
     (loop for day in '(
@@ -180,12 +181,12 @@
          (format t "~%~%~%::::: DOING ~a, DECEMBER ~a :::::~%~%" (car day) (cdr day))
          (if (= (cdr day) 1) (run-vertex graph 'monthstr))
          (if (or (equal (car day) ''sunday) (= (cdr day) 25))
-             (progn  (unrun-vertex graph 'slfcu_dly) (unrun-vertex graph 'nonworking)))
+             (progn  (unrun-vertex graph 'example_dly) (unrun-vertex graph 'nonworking)))
          ;; (format t "~a, ~a, ~a, ~a" graph (car day) grps times)
          (do-day graph (car day) grps times)
          (if (= (cdr day) 1) (unrun-vertex graph 'monthstr))
          (if (or (equal (car day) ''sunday) (= (cdr day) 25))
-             (progn  (run-vertex graph 'slfcu_dly) (run-vertex graph 'nonworking)))
+             (progn  (run-vertex graph 'example_dly) (run-vertex graph 'nonworking)))
          )))
 
  

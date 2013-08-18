@@ -47,4 +47,48 @@ implementation.  Ta-da!
 
 ## Use
 
-After loading it, you might want to 
+Take a look at example-schedule.lisp.  It loads `ajsm.lisp`, so you
+can just load that file and you will be in the ajsm package and ready
+to run the simulation.
+
+A set of jobs is a directed graph.  The vertices are all Boolean
+values.  They may represent a job which must run, or a job which must
+run before another job runs; they may represent a time of day which it
+must be for a job to run, or a day of the week, or a complex calendar
+which must in effect say, "yes, you can run today."  Mind, now -- they
+are ALL just vertices on the graph.
+
+The simulation simply cycles through all the nodes on the graph, and
+for each node, checks to see if all the nodes which lead to it are set
+to a Boolean true value.  If so, it sets that node to true.  "Setting
+it to true" is the same thing is "running" the job.  Once the job has
+"run" then it is "true" for the purposes of any and all nodes (jobs)
+which depend on it.  Make sense?
+
+(So as it happens, there is a facility which allows you to actually run
+arbitrary Lisp code when a "job" (i.e., a vertex) is "run" (i.e., set
+TRUE).  So, using that, you could actually use the model of a job
+scheduler as a real job scheduler -- but you would have to write some
+code to hook it into some kind of clock to actually use it for realz.)
+
+So the questions are basically two, then: 1) how do you define a
+schedule, and 2) how do you run through it.
+
+### How to define a job schedule
+
+Well, first, check `example-schedule.lisp` and take a look at how jobs
+are defined.  Then look at the code in `ajsm.lisp` because there are
+some comments, some doc strings, and more importantly, comments above
+most of the functions and macros which have examples of the syntax.
+Personally I find that helpful.
+
+### How to run the simulation
+
+Well, first, check `example-schedule.lisp` and run function
+`example-do-december-2012' and you will see a run.
+
+## Export to Graphviz format
+
+You can export your graph to Graphviz' .dot format and from there
+render it as a .pdf or .tiff file or whatever you like to visualize
+it.  Now that's sort of fun, isn't it?

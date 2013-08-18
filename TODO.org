@@ -10,3 +10,5 @@
   - State "TODO"       from ""           [2013-08-18 Sun 13:11]
 * TODO Make sure the .dot export still works and in a semi-reasonable way
   - State "TODO"       from ""           [2013-08-18 Sun 13:11]
+* TODO Generalize it more -- say, make a cron simulation
+  - State "TODO"       from ""           [2013-08-18 Sun 13:12]

@@ -1,0 +1,23 @@
+// This prduces a key to the symbols used by default in the Graphviz
+// output.
+
+digraph g {
+        label="KEY";
+        rankdir="LR";
+        size="8.5,11";
+        
+        node[label="HARDWARE RESOURCE", color="red",shape="box3d"] {DEVICE};
+        node[label="DAYS", color="purple",shape="circle"] {DAYS};
+        node[label="TIME", color="purple",shape="pentagon"] {TIME_OF_DAY};
+        node[label="JOB", color="black",shape="box"] {JOB};
+        node[label="JOB GROUP", color="green",shape="box"] {JOB_GROUP};
+        node[label="SCHEDULING CALENDAR OR LOGICAL DAY-SET", color="blue",shape="trapezium"] {SCHEDULING_CALENDAR};
+        node[label="HOLIDAY CALENDAR", color="blue",shape="invtrapezium"] {HOLIDAY_CALENDAR};
+
+        edge[]DEVICE ->JOB;
+        edge[]DAYS ->DEVICE;
+        edge[]TIME_OF_DAY ->DAYS;
+        edge[]JOB_GROUP ->TIME_OF_DAY;
+        edge[]SCHEDULING_CALENDAR ->JOB_GROUP;
+        edge[]HOLIDAY_CALENDAR ->SCHEDULING_CALENDAR;
+}

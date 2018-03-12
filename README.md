@@ -1,5 +1,9 @@
 # ajsm.lisp --- Advanced Job Scheduler Model
 
+[Note: It's a simulator, not a model. A simulation IMPLEMENTS a model.
+ So, I changed the name of the repository, but haven't changed the file
+ names.]
+
 `ajsm.lisp` provides a model of a subset of IBM's Advanced Job
 Scheduler for the IBM i system -- namely, the subset which I actually
 use. The threshold function is not modeled.  It is not modeled because

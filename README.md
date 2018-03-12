@@ -1,4 +1,4 @@
-# ajsm.lisp --- Advanced Job Scheduler Model
+# ajsm.lisp --- IBM i Advanced Job Scheduler Simulator
 
 [Note: It's a simulator, not a model. A simulation IMPLEMENTS a model.
  So, I changed the name of the repository, but haven't changed the file

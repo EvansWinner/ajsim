@@ -48,8 +48,8 @@ to load:
     file somewhere you like. In that directory, run =tar xvzf s-dot.tar.gz=
  2. From the resulting directory, move the file s-dot.lisp to the same
     place you indent to run ajsim from.
- 3. In that directory, run =sbcl --load s-dot.list --load example-schedule.lisp=
- 4. Do =(in-package :ajsm)= and then =(example-do-december-2012)= and you will
+ 3. In that directory, run ``sbcl --load s-dot.list --load example-schedule.lisp``
+ 4. Do ``(in-package :ajsm)`` and then ``(example-do-december-2012)`` and you will
     see the output from the example run.
 
 So, to recap, if you have Graphviz and Quicklisp installed, then you

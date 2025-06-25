@@ -18,8 +18,9 @@
 ;;;; no excuses.
 
 ;; You must have quicklisp loaded first for this to work
-(ql:quickload "s-dot")			;optional -- for rendering the
-                                        ;graph
+;(ql:quickload "s-dot")			;optional -- for rendering the
+                                        ;graph. This is no longer load-
+                                        ;able with quicklisp.
 (ql:quickload "trivial-shell")
 
 (in-package :cl-user)

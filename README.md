@@ -45,7 +45,7 @@ from Quicklisp. Therefore, here is a recipe to get the example file
 to load:
 
  1. Download http://martin-loetzsch.de/S-DOT/s-dot.tar.gz and put the
-    file somewhere you like. In that directory, run =tar xvzf s-dot.tar.gz=
+    file somewhere you like. In that directory, run ``tar xvzf s-dot.tar.gz``
  2. From the resulting directory, move the file s-dot.lisp to the same
     place you indent to run ajsim from.
  3. In that directory, run ``sbcl --load s-dot.list --load example-schedule.lisp``
